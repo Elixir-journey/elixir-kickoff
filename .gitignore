@@ -1,0 +1,37 @@
+# Build artifacts
+/_build
+/deps
+
+# Phoenix (if applicable)
+/assets/node_modules
+/assets/.sass-cache
+/priv/static
+
+# Documentation
+/doc
+
+# Environment variables
+.env
+.env.*  # e.g., .env.local, .env.prod
+
+# Erlang PLT files (Dialyzer)
+/*.plt
+/*.plt.*
+
+# Editor-specific files
+/.vscode/
+.idea/
+*.swp
+*~
+
+# macOS system files
+.DS_Store
+
+# Logs
+*.log
+
+# Coverage
+/cover/
+
+# ExDoc generated docs
+/site/
