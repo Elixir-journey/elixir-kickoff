@@ -10,9 +10,29 @@ This repository is a general-purpose Elixir project template designed to help yo
 
 ## Getting Started
 
-### Development with devcontainers
+### Development Setup
 
-#### Requirements
+#### Auto-Formatting, Linting, and Error Reporting
+This project includes a set of tools to ensure code quality and consistency. These tools are configured to run automatically on save, giving you immediate feedback as you work.
+
+1. Code formatting with [Elixir Formatter](https://hexdocs.pm/mix/main/Mix.Tasks.Format.html)
+
+It ensures any code follows a consistent style. The Elixir Formatter is set to run automatically on save, formatting your code to follow standard Elixir conventions.
+
+The .formatter.exs file controls settings, and auto-formatting is enabled in .vscode/settings.json.
+
+2. Linting with [Credo](https://hexdocs.pm/credo/overview.html)
+
+It enforces best practices and code consistency by highlighting potential readability and maintainability issues. Credo runs automatically on save through ElixirLS, displaying warnings and suggestions directly in the editor. You can also run ```mix credo``` in the terminal for a complete linting check.
+
+3. Type Checking and Error Reporting with [Dialyzer](https://www.erlang.org/doc/apps/dialyzer/dialyzer_chapter.html)
+
+It analyzes code for type errors and potential bugs, offering an additional layer of safety. Dialyzer is integrated with ElixirLS, running in the background and reporting issues as you work.
+The initial setup may take a few minutes, as it builds a PLT (Persistent Lookup Table) with necessary type information.
+
+#### Development with devcontainers
+
+##### Requirements
 
 - [Docker](https://www.docker.com) (for running containers)
 - [Visual Studio Code](https://code.visualstudio.com)
