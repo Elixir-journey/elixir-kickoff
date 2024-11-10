@@ -1,16 +1,29 @@
-# Build artifacts
+# Elixir build artifacts
 /_build
 /deps
 
-# Phoenix (if applicable)
+# Phoenix assets (if applicable)
 /assets/node_modules
 /assets/.sass-cache
 /priv/static
 
-# Documentation
+# Documentation and ExDoc output
 /doc
+/site
 
-# Environment variables
+# Coverage files from tests
+/cover
+
+# Mix-generated files
+*.ez  # Archive artifacts (mix archive.build)
+template_application-*.tar  # Package tarball (mix hex.build)
+.fetch  # Dependency fetch marker
+
+# Crash dump and temporary files
+erl_crash.dump
+/tmp/
+
+# Environment variable files
 .env
 .env.*  # e.g., .env.local, .env.prod
 
@@ -18,7 +31,7 @@
 /*.plt
 /*.plt.*
 
-# Editor-specific files
+# Editor and IDE-specific files
 /.vscode/
 .idea/
 *.swp
@@ -27,11 +40,5 @@
 # macOS system files
 .DS_Store
 
-# Logs
+# Log files
 *.log
-
-# Coverage
-/cover/
-
-# ExDoc generated docs
-/site/
