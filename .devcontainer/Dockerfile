@@ -13,6 +13,7 @@ RUN mix do local.hex --force, local.rebar --force \
     curl \
     inotify-tools \
     bash \
+    openssh \
     postgresql-client
 
 # Set up the application directory
