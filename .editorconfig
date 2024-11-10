@@ -1,0 +1,15 @@
+# Top-level EditorConfig file
+root = true
+
+# General settings for all files
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Specific settings for Elixir files
+[*.{ex,exs}]
+indent_size = 4
