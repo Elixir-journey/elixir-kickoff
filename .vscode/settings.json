@@ -1,0 +1,9 @@
+{
+    "editor.formatOnSave": true,
+    "[elixir]": {
+        "editor.formatOnSave": true
+    },
+    // Enable ElixirLS diagnostics to show Credo issues
+    "elixirLS.dialyzerEnabled": true, // Optional: disable Dialyzer for faster diagnostics if not needed
+    "elixirLS.mixEnv": "dev" // Ensure ElixirLS runs in the dev environment
+}

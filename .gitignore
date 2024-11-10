@@ -32,7 +32,6 @@ erl_crash.dump
 /*.plt.*
 
 # Editor and IDE-specific files
-/.vscode/
 .idea/
 *.swp
 *~
