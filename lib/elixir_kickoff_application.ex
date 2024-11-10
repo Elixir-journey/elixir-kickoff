@@ -3,7 +3,8 @@ defmodule ElixirKickoff.Application do
 
   def start(_type, _args) do
     IO.puts("TemplateApplication is running in the container!")
-    :timer.sleep(100) # Small delay to ensure flush
+    # Small delay to ensure flush
+    :timer.sleep(100)
     IO.puts("Log message successfully flushed")
 
     children = [
