@@ -1,4 +1,10 @@
 defmodule ElixirKickoff.Application do
+  @moduledoc """
+  The main application module for ElixirKickoff.
+
+  This module is the entry point for starting the application. It initializes
+  the supervision tree and logs a message when the application starts in the container.
+  """
   use Application
 
   def start(_type, _args) do
