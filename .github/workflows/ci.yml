@@ -1,0 +1,42 @@
+# .github/workflows/ci.yml
+
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: '1.17' 
+          otp-version: '27'
+
+      - name: Install dependencies
+        run: mix deps.get
+
+      - name: Check code formatting
+        run: mix format --check-formatted
+
+      - name: Run Credo for linting
+        run: mix credo --strict
+
+      - name: Run Dialyzer for type checking
+        run: |
+          mix dialyzer --plt || mix dialyzer
+        env:
+          MIX_ENV: dev  # Ensure Dialyzer uses the dev environment
+
+      - name: Run tests
+        run: mix test
