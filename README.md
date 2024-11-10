@@ -65,9 +65,9 @@ docker run elixir-kickoff
 ## Code style & editor configuration
 This project uses an .editorconfig file to ensure consistent coding standards across different editors and environments. The .editorconfig file helps maintain consistent formatting for:
 
-Indentation: Spaces with a width of 4.
-Line endings: LF (Line Feed) for cross-platform compatibility.
-Trimming trailing whitespace and final newline insertion for cleaner diffs.
+- Indentation: Spaces with a width of 4.
+- Line endings: LF (Line Feed) for cross-platform compatibility.
+- Trimming trailing whitespace and final newline insertion for cleaner diffs.
 
 ### How It Works
 
