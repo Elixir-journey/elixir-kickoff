@@ -1,5 +1,3 @@
-# .github/workflows/ci.yml
-
 name: CI
 
 on:
@@ -12,7 +10,9 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out the code
         uses: actions/checkout@v3
@@ -20,23 +20,41 @@ jobs:
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
         with:
-          elixir-version: '1.17' 
-          otp-version: '27'
+          elixir-version: '1.17'
+          otp-version: '27.1.2'
 
       - name: Install dependencies
         run: mix deps.get
 
-      - name: Check code formatting
+        # If the key doesn’t change, the cache will persist as long as it’s used within a 7-day period.
+        # If the cache isn’t accessed within 7 days, GitHub will expire it, even if the key hasn’t changed.
+        
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+
+      - name: Cache Dialyzer PLT
+        uses: actions/cache@v3
+        with:
+          path: _build/dev/*.plt
+          key: ${{ runner.os }}-dialyzer-plt-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-dialyzer-plt-
+
+      - name: Run formatter check
         run: mix format --check-formatted
 
       - name: Run Credo for linting
         run: mix credo --strict
 
       - name: Run Dialyzer for type checking
-        run: |
-          mix dialyzer --plt || mix dialyzer
+        run: mix dialyzer
         env:
-          MIX_ENV: dev  # Ensure Dialyzer uses the dev environment
+          MIX_ENV: dev
 
       - name: Run tests
         run: mix test
