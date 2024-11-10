@@ -62,6 +62,17 @@ docker build -t elixir-kickoff .
 docker run elixir-kickoff
 ```
 
+## Code style & editor configuration
+This project uses an .editorconfig file to ensure consistent coding standards across different editors and environments. The .editorconfig file helps maintain consistent formatting for:
+
+Indentation: Spaces with a width of 4.
+Line endings: LF (Line Feed) for cross-platform compatibility.
+Trimming trailing whitespace and final newline insertion for cleaner diffs.
+
+### How It Works
+
+If you’re using Visual Studio Code or another modern editor, the settings will be applied automatically if you have [EditorConfig support](https://editorconfig.org). The VS Code Dev Container setup includes this support by default, so no extra setup is needed.
+
 ## Development Notes
 
 - Environment Variables: Use .env files to manage environment variables. Make sure they are listed in .gitignore to keep sensitive information secure.
@@ -69,4 +80,4 @@ docker run elixir-kickoff
 Contributing
 
 ## Contributing
-Feel free to submit a pull request or open an issue if you have suggestions for improvements.
+Feel free to submit a pull request or open an issue if you have improvement suggestions.
