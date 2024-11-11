@@ -1,4 +1,8 @@
 # Elixir kickoff
+![Build Status](https://github.com/Elixir-journey/elixir-kickoff/actions/workflows/ci.yml/badge.svg)
+![Code Style](https://img.shields.io/badge/style-credo-blue)
+![License](https://img.shields.io/github/license/Elixir-journey/elixir-kickoff)
+
 This repository is a general-purpose Elixir project template designed to help you quickly start new projects. It includes essential configurations and Docker support.
 
 ## Features
