@@ -22,6 +22,7 @@
   },
   "postCreateCommand": "mix deps.get",
   "remoteUser": "vscode",
+  "forwardPorts": [8080],
   "mounts": [
     "source=${localWorkspaceFolder},target=/workspace,type=bind"
   ],

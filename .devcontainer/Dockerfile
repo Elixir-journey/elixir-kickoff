@@ -19,15 +19,31 @@ RUN mix do local.hex --force, local.rebar --force \
 # Set up the application directory
 WORKDIR /workspace
 
-# Copy mix files and install dependencies
-COPY mix.exs mix.lock ./
-RUN mix deps.get --only $MIX_ENV
+# Clone the Livebook repository
+RUN git clone https://github.com/livebook-dev/livebook.git /workspace/livebook
 
-# Copy the rest of the application code
-COPY . .
+# Install Elixir dependencies for Livebook
+WORKDIR /workspace/livebook
+RUN mix deps.get
 
-# Run compilation in development mode
-RUN mix compile
+# Install JavaScript dependencies for assets
+WORKDIR /workspace/livebook/assets
+RUN npm install
 
-# Default command to keep container running for VS Code
+# Copy the start_livebook.sh script and make it executable
+WORKDIR /workspace
+COPY scripts/start_livebook.sh /workspace/start_livebook.sh
+RUN chmod +x /workspace/start_livebook.sh
+
+# Set the working directory back to the Livebook root directory
+WORKDIR /workspace/livebook
+
+# Expose the ports Livebook uses
+EXPOSE 4000 4001
+
+# Set environment variables for Livebook
+ENV ELIXIR_ERL_OPTIONS="-epmd_module Elixir.Livebook.EPMD"
+ENV LIVEBOOK_IP="0.0.0.0"
+
+# Default command to keep the container running
 CMD ["sleep", "infinity"]
