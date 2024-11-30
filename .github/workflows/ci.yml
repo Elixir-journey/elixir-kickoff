@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Check out the code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all branches
+          ref: main # Ensure main branch is checked out
 
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
