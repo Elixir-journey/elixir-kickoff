@@ -28,7 +28,7 @@ jobs:
 
       # If the key doesn’t change, the cache will persist as long as it’s used within a 7-day period.
       # If the cache isn’t accessed within 7 days, GitHub will expire it, even if the key hasn’t changed.
-      
+
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
@@ -68,7 +68,7 @@ jobs:
       - name: Run tests
         run: mix test
 
-       - name: Generate documentation
+      - name: Generate documentation
         if: !steps.cache-docs.outputs.cache-hit
         working-directory: ${{ github.workspace }} # Ensure this is run in the root directory
         run: mix docs
