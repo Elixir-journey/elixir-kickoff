@@ -16,9 +16,6 @@ jobs:
     steps:
       - name: Check out the code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Fetch all history for all branches
-          ref: main # Ensure main branch is checked out
 
       - name: Set up Elixir
         uses: erlef/setup-beam@v1
@@ -28,9 +25,6 @@ jobs:
 
       - name: Install dependencies
         run: mix deps.get
-
-        # If the key doesn’t change, the cache will persist as long as it’s used within a 7-day period.
-        # If the cache isn’t accessed within 7 days, GitHub will expire it, even if the key hasn’t changed.
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -47,6 +41,15 @@ jobs:
           key: ${{ runner.os }}-dialyzer-plt-${{ hashFiles('**/mix.lock') }}
           restore-keys: |
             ${{ runner.os }}-dialyzer-plt-
+      
+      - name: Cache documentation
+        id: cache-docs
+        uses: actions/cache@v3
+        with:
+          path: doc
+          key: ${{ runner.os }}-docs-${{ hashFiles('mix.exs', 'lib/**/*', 'README.md') }}
+          restore-keys: |
+            ${{ runner.os }}-docs-
 
       - name: Run formatter check
         run: mix format --check-formatted
@@ -62,8 +65,12 @@ jobs:
       - name: Run tests
         run: mix test
 
-      - name: Generate documentation
+       - name: Generate documentation
+        if: !steps.cache-docs.outputs.cache-hit
+        working-directory: ${{ github.workspace }} # Ensure this is run in the root directory
         run: mix docs
+        env:
+          MIX_ENV: dev
 
       - name: Upload documentation
         uses: actions/upload-artifact@v3
@@ -72,9 +79,11 @@ jobs:
           path: doc/
 
       - name: Deploy to GitHub Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add doc/
           git commit -m "Update documentation [skip ci]" || echo "No changes to commit"
-          git push origin main
+          git push origin ${{ github.head_ref || github.ref_name }}
