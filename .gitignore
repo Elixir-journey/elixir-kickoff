@@ -8,7 +8,6 @@
 /priv/static
 
 # Documentation and ExDoc output
-/doc
 /site
 
 # Coverage files from tests
