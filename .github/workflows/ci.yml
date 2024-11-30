@@ -26,9 +26,6 @@ jobs:
       - name: Install dependencies
         run: mix deps.get
 
-      # If the key doesn’t change, the cache will persist as long as it’s used within a 7-day period.
-      # If the cache isn’t accessed within 7 days, GitHub will expire it, even if the key hasn’t changed.
-
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
@@ -44,7 +41,7 @@ jobs:
           key: ${{ runner.os }}-dialyzer-plt-${{ hashFiles('**/mix.lock') }}
           restore-keys: |
             ${{ runner.os }}-dialyzer-plt-
-      
+
       - name: Cache documentation
         id: cache-docs
         uses: actions/cache@v3
@@ -69,8 +66,8 @@ jobs:
         run: mix test
 
       - name: Generate documentation
-        if: !steps.cache-docs.outputs.cache-hit
-        working-directory: ${{ github.workspace }} # Ensure this is run in the root directory
+        if: steps.cache-docs.outputs.cache-hit != 'true'
+        working-directory: ${{ github.workspace }}
         run: mix docs
         env:
           MIX_ENV: dev
