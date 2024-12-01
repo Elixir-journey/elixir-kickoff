@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "jakebecker.elixir-ls",
+        "waderyan.gitblame",
+        "donjayamanne.githistory",
+        "yzhang.markdown-all-in-one",
+        "gurumukhi.selected-lines-count"
+    ]
+}

@@ -7,12 +7,12 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "jakebecker.elixir-ls", // Elixir Language Server for code completion, diagnostics, and formatting
-        "ms-azuretools.vscode-docker", // Docker extension for easy container management
-        "editorconfig.editorconfig", // EditorConfig for consistent coding styles
-        "eamodio.gitlens", // GitLens for Git history, blame, and insights
-        "streetsidesoftware.code-spell-checker", // Spell checker for comments and documentation
-        "esbenp.prettier-vscode", // Prettier for consistent formatting, useful if working with front-end code in the project
+        "jakebecker.elixir-ls",
+        "ms-azuretools.vscode-docker",
+        "editorconfig.editorconfig",
+        "eamodio.gitlens",
+        "streetsidesoftware.code-spell-checker",
+        "esbenp.prettier-vscode",
         "pkief.material-icon-theme"
       ],
       "settings": {
