@@ -29,7 +29,9 @@ defmodule TemplateApplication.MixProject do
       {:jason, "~> 1.3"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.1", only: [:dev], runtime: false},
-      {:ex_doc, "~> 0.34", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.34", only: :dev, runtime: false},
+      {:mix_audit, "~> 2.1"},
+      {:sobelow, "~> 0.13.0"}
     ]
   end
 end
