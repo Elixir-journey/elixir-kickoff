@@ -1,0 +1,22 @@
+# Exclude system directories
+/etc
+/bin
+/usr
+/lib
+/proc
+/sys
+/dev
+/sbin
+/tmp
+/var
+
+# Exclude Git repository files
+.git
+.gitignore
+
+# Exclude node_modules if not needed
+node_modules
+
+# Exclude logs and temporary files
+*.log
+*.tmp
