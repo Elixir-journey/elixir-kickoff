@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "mix_task",
+            "name": "Mix Run",
+            "request": "launch",
+            "projectDir": "${workspaceFolder}",
+            "task": "run",
+            "env": {
+                "MIX_ENV": "dev"
+            }
+        },
+        {
+            "type": "mix_task",
+            "name": "Mix Test",
+            "request": "launch",
+            "projectDir": "${workspaceFolder}",
+            "task": "test",
+            "env": {
+                "MIX_ENV": "test"
+            }
+        }
+    ]
+}
