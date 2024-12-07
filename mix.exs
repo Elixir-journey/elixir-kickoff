@@ -31,7 +31,8 @@ defmodule ElixirKickoff.MixProject do
       {:dialyxir, "~> 1.1", only: [:dev], runtime: false},
       {:ex_doc, "~> 0.34", only: :dev, runtime: false},
       {:mix_audit, "~> 2.1"},
-      {:sobelow, "~> 0.13.0"}
+      {:sobelow, "~> 0.13.0"},
+      {:styler, "~> 1.2", only: [:dev, :test], runtime: false}
     ]
   end
 end
