@@ -1,9 +1,9 @@
-defmodule TemplateApplication.MixProject do
+defmodule ElixirKickoff.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :template_application,
+      app: :elixir_kickoff,
       version: "0.1.0",
       elixir: "~> 1.17",
       start_permanent: Mix.env() == :prod,

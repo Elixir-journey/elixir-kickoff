@@ -8,7 +8,7 @@ defmodule ElixirKickoff.Application do
   use Application
 
   def start(_type, _args) do
-    IO.puts("TemplateApplication is running in the container!")
+    IO.puts("Elixir kickoff template is running in the container!")
     # Small delay to ensure flush
     :timer.sleep(100)
     IO.puts("Log message successfully flushed")
@@ -17,7 +17,7 @@ defmodule ElixirKickoff.Application do
       # Define workers and supervisors to be started
     ]
 
-    opts = [strategy: :one_for_one, name: TemplateApplication.Supervisor]
+    opts = [strategy: :one_for_one, name: ElixirKickoff.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end
