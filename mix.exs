@@ -5,7 +5,8 @@ defmodule ElixirKickoff.MixProject do
     [
       app: :elixir_kickoff,
       version: "0.1.0",
-      elixir: "~> 1.17",
+      elixir: "~> 1.13",
+      erlang: "~> 25.0",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: [

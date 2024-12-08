@@ -14,23 +14,21 @@ jobs:
     strategy:
       matrix:
         include:
+          # Elixir 1.13 combinations
+          - elixir: '1.13'
+            otp: '25'
+
           # Elixir 1.14 combinations
-          - elixir: '1.14'
-            otp: '24'
           - elixir: '1.14'
             otp: '25'
 
           # Elixir 1.15 combinations
-          - elixir: '1.15'
-            otp: '24'
           - elixir: '1.15'
             otp: '25'
           - elixir: '1.15'
             otp: '26'
 
           # Elixir 1.16 combinations
-          - elixir: '1.16'
-            otp: '24'
           - elixir: '1.16'
             otp: '25'
           - elixir: '1.16'
@@ -71,23 +69,21 @@ jobs:
     strategy:
       matrix:
         include:
+          # Elixir 1.13 combinations
+          - elixir: '1.13'
+            otp: '25'
+
           # Elixir 1.14 combinations
-          - elixir: '1.14'
-            otp: '24'
           - elixir: '1.14'
             otp: '25'
 
           # Elixir 1.15 combinations
-          - elixir: '1.15'
-            otp: '24'
           - elixir: '1.15'
             otp: '25'
           - elixir: '1.15'
             otp: '26'
 
           # Elixir 1.16 combinations
-          - elixir: '1.16'
-            otp: '24'
           - elixir: '1.16'
             otp: '25'
           - elixir: '1.16'
@@ -144,23 +140,21 @@ jobs:
     strategy:
       matrix:
         include:
+          # Elixir 1.13 combinations
+          - elixir: '1.13'
+            otp: '25'
+
           # Elixir 1.14 combinations
-          - elixir: '1.14'
-            otp: '24'
           - elixir: '1.14'
             otp: '25'
 
           # Elixir 1.15 combinations
-          - elixir: '1.15'
-            otp: '24'
           - elixir: '1.15'
             otp: '25'
           - elixir: '1.15'
             otp: '26'
 
           # Elixir 1.16 combinations
-          - elixir: '1.16'
-            otp: '24'
           - elixir: '1.16'
             otp: '25'
           - elixir: '1.16'
@@ -193,23 +187,21 @@ jobs:
     strategy:
       matrix:
         include:
+          # Elixir 1.13 combinations
+          - elixir: '1.13'
+            otp: '25'
+
           # Elixir 1.14 combinations
-          - elixir: '1.14'
-            otp: '24'
           - elixir: '1.14'
             otp: '25'
 
           # Elixir 1.15 combinations
-          - elixir: '1.15'
-            otp: '24'
           - elixir: '1.15'
             otp: '25'
           - elixir: '1.15'
             otp: '26'
 
           # Elixir 1.16 combinations
-          - elixir: '1.16'
-            otp: '24'
           - elixir: '1.16'
             otp: '25'
           - elixir: '1.16'
