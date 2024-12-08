@@ -53,6 +53,30 @@ mix deps.get
 mix run --no-halt
 ```
 
+#### Development without container
+
+#### Using the Dev Container
+This project includes a preconfigured dev container. To get started, open the repository in a compatible IDE (like VS Code) and use the dev container.
+
+#### Setting Up Locally
+If you prefer to set up the project locally, ensure you have the [tool version manager](https://asdf-vm.com/guide/introduction.html) `asdf` [installed](https://asdf-vm.com/guide/getting-started.html#_2-download-asdf). 
+
+Then, install the required versions:
+```bash
+asdf plugin-add erlang
+asdf plugin-add elixir
+asdf install
+```
+
+It'll install both Elixir and Erlang with the specific versions in the .tool-versions file.
+
+Run the following to confirm that it's installed as expected.
+
+```
+elixir --version | grep "Elixir 1.17"
+erl -version | grep "Erlang/OTP 26"
+```
+
 #### Customization and Configuration
 
 The Dev Container uses a pre-built Docker image for faster setup and consistent environments across all sessions. The image is hosted on GitHub Container Registry at [ghcr.io/elixir-journey/elixir-kickoff:latest](https://github.com/orgs/Elixir-journey/packages/container/package/elixir-kickoff).
