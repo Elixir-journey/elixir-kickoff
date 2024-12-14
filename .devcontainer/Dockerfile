@@ -16,6 +16,12 @@ RUN mix do local.hex --force, local.rebar --force \
     openssh \
     postgresql-client
 
+# Install GitHub CLI (gh)
+RUN apk add --no-cache github-cli
+
+# Ensure .ssh directory exists
+RUN mkdir -p /root/.ssh && chmod 700 /root/.ssh
+
 # Set up the application directory
 WORKDIR /workspace
 
@@ -26,8 +32,11 @@ RUN mix deps.get --only $MIX_ENV
 # Copy the rest of the application code
 COPY . .
 
+# Ensure proper permissions for the workspace directory
+RUN chown -R root:root /workspace
+
 # Run compilation in development mode
 RUN mix compile
 
-# Default command to keep container running for VS Code
-CMD ["sleep", "infinity"]
+# Default command for better interactive experience
+CMD ["/bin/bash"]
