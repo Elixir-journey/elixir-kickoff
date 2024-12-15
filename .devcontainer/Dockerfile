@@ -41,15 +41,11 @@ COPY --from=builder /app /app
 # Install Hex and Rebar for runtime usage
 RUN mix do local.hex --force, local.rebar --force
 
-# Ensure escripts directory exists
-RUN mkdir -p $MIX_HOME/escripts
-
-# Pre-install Livebook or other escripts if needed
-RUN mix escript.install hex livebook --force
+# Check if ~/.p10k.zsh is present; if not, use the default configuration
+RUN [ -f /root/.p10k.zsh ] || cp /app/.devcontainer/.p10k.zsh /root/.p10k.zsh
 
 # Configure Zsh with Powerlevel10k
-RUN echo 'POWERLEVEL9K_MODE=nerdfont-complete' > /root/.p10k.zsh \
-    && echo '[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh' > /root/.zshrc \
+RUN echo '[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh' > /root/.zshrc \
     && echo 'export ZSH_THEME="powerlevel10k/powerlevel10k"' >> /root/.zshrc \
     && echo "alias ll='ls -la'" >> /root/.zshrc \
     && echo 'export SHELL="/bin/zsh"' >> /root/.zshrc \
