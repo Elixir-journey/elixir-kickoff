@@ -1,32 +1,40 @@
 {
-  "name": "Elixir Kickoff Development Container",
-  "image": "ghcr.io/elixir-journey/elixir-kickoff:latest",
-  "remoteEnv": {
-    "MIX_ENV": "dev"
-  },
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "jakebecker.elixir-ls",
-        "ms-azuretools.vscode-docker",
-        "editorconfig.editorconfig",
-        "eamodio.gitlens",
-        "streetsidesoftware.code-spell-checker",
-        "esbenp.prettier-vscode",
-        "pkief.material-icon-theme"
-      ],
-      "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash"
+    "name": "Elixir Kickoff Development Container",
+    "build": {
+      "dockerfile": "./Dockerfile",
+      "context": ".."
+    },
+    "remoteEnv": {
+      "MIX_ENV": "dev"
+    },
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "jakebecker.elixir-ls",
+          "ms-azuretools.vscode-docker",
+          "editorconfig.editorconfig",
+          "eamodio.gitlens",
+          "streetsidesoftware.code-spell-checker",
+          "esbenp.prettier-vscode",
+          "pkief.material-icon-theme"
+        ],
+        "settings": {
+          "terminal.integrated.defaultProfile.linux": "zsh",
+          "terminal.integrated.profiles.linux": {
+            "zsh": {
+              "path": "/bin/zsh"
+            }
+          }
+        }
       }
-    }
-  },
-  "postCreateCommand": "mix deps.get",
-  "postStartCommand": "/bin/sh /workspace/.devcontainer/scripts/post_start.sh",
-  "mounts": [
-    "source=${localWorkspaceFolder},target=/workspace,type=bind",
-    "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached",
-    "source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached",
-    "source=${localEnv:HOME}/.p10k.zsh,target=/root/.p10k.zsh,type=bind,consistency=cached"
-  ],
-  "workspaceFolder": "/workspace"
-}
+    },
+    "postCreateCommand": "mix deps.get",
+    "postStartCommand": "/bin/sh /workspace/.devcontainer/scripts/post_start.sh",
+    "mounts": [
+      "source=${localWorkspaceFolder},target=/workspace,type=bind",
+      "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached",
+      "source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind,consistency=cached",
+      "source=${localEnv:HOME}/.p10k.zsh,target=/root/.p10k.zsh,type=bind,consistency=cached"
+    ],
+    "workspaceFolder": "/workspace"
+  }
