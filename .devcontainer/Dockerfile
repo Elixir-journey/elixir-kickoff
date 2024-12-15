@@ -13,8 +13,7 @@ RUN mix deps.get
 
 COPY . .
 # Ensure directories exist
-RUN mkdir -p /app/config /app/rel \
-    && mix compile
+RUN mkdir -p /app/config /app/rel && mix compile
 
 # Final stage
 FROM elixir:1.17-alpine
@@ -30,6 +29,10 @@ WORKDIR /app
 
 # Copy the entire project directory
 COPY . /app
+
+# Default Powerlevel10k configuration
+RUN echo "POWERLEVEL9K_MODE=nerdfont-complete" > /root/.p10k.zsh \
+    && echo '[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh' >> /root/.zshrc
 
 # Configure Zsh
 RUN echo "export ZSH_THEME=\"robbyrussell\"" > /root/.zshrc \
