@@ -1,42 +1,46 @@
-# Use an official Elixir image as the base
+# Builder stage
+FROM elixir:1.17-alpine AS builder
+
+ENV MIX_ENV=prod
+
+RUN mix do local.hex --force, local.rebar --force \
+    && apk add --no-cache git curl bash openssh postgresql-client
+
+WORKDIR /app
+
+COPY mix.exs mix.lock ./
+RUN mix deps.get
+
+COPY . .
+# Ensure directories exist
+RUN mkdir -p /app/config /app/rel && mix compile
+
+# Final stage
 FROM elixir:1.17-alpine
 
-# Set default environment to development
 ENV MIX_ENV=dev
 
-# Install Hex, Rebar, and essential tools
-RUN mix do local.hex --force, local.rebar --force \
-    && apk add --no-cache \
-    git \
-    nodejs \
-    npm \
-    curl \
-    inotify-tools \
-    bash \
-    openssh \
-    postgresql-client
+RUN apk add --no-cache \
+    bash openssh postgresql-client \
+    git curl zsh zsh-autosuggestions zsh-syntax-highlighting zsh-completions \
+    && curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
 
-# Install GitHub CLI (gh)
-RUN apk add --no-cache github-cli
+WORKDIR /app
 
-# Ensure .ssh directory exists
-RUN mkdir -p /root/.ssh && chmod 700 /root/.ssh
+# Copy the entire project directory
+COPY . /app
 
-# Set up the application directory
-WORKDIR /workspace
+# Default Powerlevel10k configuration
+RUN echo "POWERLEVEL9K_MODE=nerdfont-complete" > /root/.p10k.zsh \
+    && echo '[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh' >> /root/.zshrc
 
-# Copy mix files and install dependencies
-COPY mix.exs mix.lock ./
-RUN mix deps.get --only $MIX_ENV
+# Configure Zsh
+RUN echo "export ZSH_THEME=\"robbyrussell\"" > /root/.zshrc \
+    && echo "alias ll='ls -la'" >> /root/.zshrc \
+    && echo "export SHELL=\"/bin/zsh\"" >> /root/.zshrc \
+    && echo "source /root/.zsh_plugins.sh" >> /root/.zshrc \
+    && antibody bundle zsh-users/zsh-autosuggestions > /root/.zsh_plugins.sh \
+    && antibody bundle zsh-users/zsh-syntax-highlighting >> /root/.zsh_plugins.sh \
+    && antibody bundle romkatv/powerlevel10k >> /root/.zsh_plugins.sh
 
-# Copy the rest of the application code
-COPY . .
-
-# Ensure proper permissions for the workspace directory
-RUN chown -R root:root /workspace
-
-# Run compilation in development mode
-RUN mix compile
-
-# Default command for better interactive experience
-CMD ["/bin/bash"]
+CMD ["/bin/zsh"]

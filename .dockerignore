@@ -1,0 +1,15 @@
+# Elixir build files
+/_build
+/deps
+
+# Node.js build files (if applicable)
+node_modules
+
+# Editor and OS files
+*.swp
+*.swo
+*.log
+.DS_Store
+
+# Git ignored files
+.git
