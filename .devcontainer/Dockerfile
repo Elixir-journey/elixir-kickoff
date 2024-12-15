@@ -14,19 +14,27 @@ RUN mix do local.hex --force, local.rebar --force \
     inotify-tools \
     bash \
     openssh \
-    postgresql-client
+    postgresql-client \
+    zsh \
+    zsh-autosuggestions \
+    zsh-syntax-highlighting \
+    zsh-completions \
+    && curl -sfL git.io/antibody | sh -s - -b /usr/local/bin
 
-# Install GitHub CLI (gh)
-RUN apk add --no-cache github-cli
-
-# Ensure .ssh directory exists
-RUN mkdir -p /root/.ssh && chmod 700 /root/.ssh
+# Configure Zsh
+RUN echo "export ZSH_THEME=\"robbyrussell\"" > /root/.zshrc \
+    && echo "alias ll='ls -la'" >> /root/.zshrc \
+    && echo "source /usr/share/zsh/plugins/zsh-completions/zsh-completions.plugin.zsh" >> /root/.zshrc \
+    && echo "export SHELL=\"/bin/zsh\"" >> /root/.zshrc \
+    && antibody bundle zsh-users/zsh-autosuggestions > /root/.zsh_plugins.sh \
+    && antibody bundle zsh-users/zsh-syntax-highlighting >> /root/.zsh_plugins.sh \
+    && echo "source /root/.zsh_plugins.sh" >> /root/.zshrc
 
 # Set up the application directory
 WORKDIR /workspace
 
 # Copy mix files and install dependencies
-COPY mix.exs mix.lock ./
+COPY ../mix.exs ../mix.lock /workspace/
 RUN mix deps.get --only $MIX_ENV
 
 # Copy the rest of the application code
@@ -38,5 +46,5 @@ RUN chown -R root:root /workspace
 # Run compilation in development mode
 RUN mix compile
 
-# Default command for better interactive experience
-CMD ["/bin/bash"]
+# Launch Zsh as the default shell
+CMD ["/bin/zsh"]
