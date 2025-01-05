@@ -5,7 +5,8 @@
       "context": ".."
     },
     "remoteEnv": {
-      "MIX_ENV": "dev"
+      "MIX_ENV": "dev",
+      "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
     },
     "customizations": {
       "vscode": {
@@ -29,7 +30,7 @@
       }
     },
     "postCreateCommand": "mix deps.get",
-    "postStartCommand": "/bin/sh /workspace/.devcontainer/scripts/post_start.sh",
+    "postStartCommand": "mix post_start",
     "mounts": [
       "source=${localWorkspaceFolder},target=/workspace,type=bind",
       "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached",

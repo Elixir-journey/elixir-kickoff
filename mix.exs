@@ -12,6 +12,9 @@ defmodule ElixirKickoff.MixProject do
       docs: [
         main: "readme",
         extras: ["README.md"]
+      ],
+      dialyzer: [
+        plt_add_apps: [:mix]
       ]
     ]
   end
