@@ -36,7 +36,8 @@ defmodule ElixirKickoff.MixProject do
       {:ex_doc, "~> 0.34", only: :dev, runtime: false},
       {:mix_audit, "~> 2.1"},
       {:sobelow, "~> 0.13.0"},
-      {:styler, "~> 1.2", only: [:dev, :test], runtime: false}
+      {:styler, "~> 1.2", only: [:dev, :test], runtime: false},
+      {:dotenv, "~> 3.0.0", only: [:dev, :test]}
     ]
   end
 end
