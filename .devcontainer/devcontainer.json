@@ -30,7 +30,7 @@
       }
     },
     "postCreateCommand": "mix deps.get",
-    "postStartCommand": "mix post_start",
+    "postStartCommand": "mix env.load && mix post_start",
     "mounts": [
       "source=${localWorkspaceFolder},target=/workspace,type=bind",
       "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached",
